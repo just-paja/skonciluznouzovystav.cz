@@ -1,0 +1,23 @@
+---
+- name: Deploy the redirects
+  hosts: web
+  roles:
+    - role: practical-ansible.nginx_redirect
+      project_name: cz-skonciluznouzovystav-redirects
+      project_version: '{{ lookup("env", "NGINX_STATIC_VERSION") }}'
+      server_names: www.skonciluznouzovystav.cz
+      destination_domain: skonciluznouzovystav.cz
+      admin_email: pavel@zak.global
+      become: true
+
+- name: Deploy the website
+  hosts: web
+  roles:
+    - role: practical-ansible.nginx_static
+      project_name: cz-skonciluznouzovystav
+      project_environment: production
+      project_version: '{{ lookup("env", "NGINX_STATIC_VERSION") }}'
+      server_names: skonciluznouzovystav.cz
+      admin_email: pavel@zak.global
+      dir_source: src/
+      become: true

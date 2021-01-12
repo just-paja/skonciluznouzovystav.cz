@@ -10,6 +10,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v1
@@ -28,14 +29,14 @@ jobs:
           ansible-galaxy install -r requirements-ansible.yml
       - uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.PRODUCTION_SSH_KEY }}
+          key: ${{ secrets.SSH_KEY }}
           name: id_rsa
-          known_hosts: ${{ secrets.PRODUCTION_KNOWN_HOSTS }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - name: Deploy to Production
         env:
-          DEPLOY_HOST: ${{ secrets.PRODUCTION_DEPLOY_HOST }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
           NGINX_STATIC_VERSION: ${{ env.RELEASE_VERSION }}
         run: |
           echo $NGINX_STATIC_VERSION

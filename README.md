@@ -1,0 +1,2 @@
+# skonciluznouzovystav.cz
+skonciluznouzovystav.cz

@@ -25,8 +25,11 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: |
+          sudo apt-get install imagemagick
           pip install -r requirements.txt
           ansible-galaxy install -r requirements-ansible.yml
+      - name: Build images
+        run: ./scripts/convert-images.sh
       - uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}

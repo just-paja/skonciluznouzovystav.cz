@@ -24,5 +24,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies
         run: |
+          sudo apt-get install imagemagick
           pip install -r requirements.txt
           ansible-galaxy install -r requirements-ansible.yml -p ./roles
+      - name: Build images
+        run: ./scripts/convert-images.sh

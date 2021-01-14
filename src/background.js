@@ -16,10 +16,7 @@ function loadManifest() {
 }
 
 function initializeBackgroundsElement(file) {
-  const el = document.createElement('div')
-  el.className = 'bg'
-  document.body.appendChild(el)
-  return el
+  return document.querySelector('aside.bg')
 }
 
 function setNextBackground() {

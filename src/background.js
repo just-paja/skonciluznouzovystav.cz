@@ -22,7 +22,6 @@ function initializeBackgroundsElement(file) {
 function setNextBackground() {
   index = Math.floor(Math.random() * Math.floor(images.length))
   el.style.backgroundImage = 'url(' + images[index].webp + ')'
-  console.log(el.style)
 }
 
 function runBackgrounds(backgrounds) {
